@@ -122,6 +122,31 @@ export class ClockWeatherCard extends LitElement {
     `;
   }
 
+  // https://lit.dev/docs/components/lifecycle/
+  protected updated(): void {
+    if (!this.shadowRoot) return
+
+    const outter = this.shadowRoot.querySelector('#today-right');
+    if (!outter) return
+    const outterWidth = getComputedStyle(outter).getPropertyValue('width');
+    const outterHeight = getComputedStyle(outter).getPropertyValue('height');
+
+    const top = this.shadowRoot.querySelector('#today-right-top');
+    if (!top) return
+    const topHeight = getComputedStyle(top).getPropertyValue('height');
+
+    const bottom = this.shadowRoot.querySelector('#today-right-bottom');
+    if (!bottom) return
+    const bottomHeight = getComputedStyle(top).getPropertyValue('height');
+
+    const center = this.shadowRoot.querySelector('#today-right-center');
+    if (!center) return
+    console.log('nan', Number(outterHeight.replace('px', '')))
+    const centerHeight = Number(outterHeight.replace('px', '')) - Number(topHeight.replace('px', '')) - Number(bottomHeight.replace('px', ''))
+    center.setAttribute('height', centerHeight + 'px')
+    console.log('centerheight', centerHeight)
+  }
+
   private renderToday(): TemplateResult {
     const weather = this.getWeather();
     const state = weather.state;
@@ -136,15 +161,15 @@ export class ClockWeatherCard extends LitElement {
       <clock-weather-card-today-left>
         <img class="grow-img" src=${icon} />
       </clock-weather-card-today-left>
-      <clock-weather-card-today-right>
+      <clock-weather-card-today-right id="today-right">
         <clock-weather-card-today-right-wrap>
-          <clock-weather-card-today-right-wrap-top>
+          <clock-weather-card-today-right-wrap-top id="today-right-top">
             ${localizedState}, ${localizedTemp}
           </clock-weather-card-today-right-wrap-top>
-          <clock-weather-card-today-right-wrap-center>
+          <clock-weather-card-today-right-wrap-center  id="today-right-center">
             ${this.time()}
           </clock-weather-card-today-right-wrap-center>
-          <clock-weather-card-today-right-wrap-bottom>
+          <clock-weather-card-today-right-wrap-bottom  id="today-right-bottom">
             ${this.date()}
           </clock-weather-card-today-right-wrap-bottom>
         </clock-weather-card-today-right-wrap>

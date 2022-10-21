@@ -28,6 +28,7 @@ export default css`
     width: 65%;
     justify-content: space-around;
     align-items: center;
+    margin: 1rem;
   }
 
   clock-weather-card-today-right-wrap {
