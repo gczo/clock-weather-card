@@ -15,8 +15,18 @@ Credits go to [basmilius](https://github.com/basmilius) for the awesome [weather
 
 ## FAQ
 
-- [Why don't I see the current day in my weather forecast?](#why-dont-i-see-the-current-day-in-my-weather-forecast)
-- [Why does the forecast show less days than expected?](#why-does-the-forecast-show-less-days-than-expected)
+- [Clock Weather Card](#clock-weather-card)
+  - [FAQ](#faq)
+    - [Why don't I see the current day in my weather forecast?](#why-dont-i-see-the-current-day-in-my-weather-forecast)
+    - [Why does the forecast show less days than expected?](#why-does-the-forecast-show-less-days-than-expected)
+  - [Installation](#installation)
+    - [Manual Installation](#manual-installation)
+    - [Installation and tracking with `hacs`](#installation-and-tracking-with-hacs)
+  - [Configuration](#configuration)
+    - [Minimal configuration](#minimal-configuration)
+    - [Full configuration](#full-configuration)
+    - [Options](#options)
+  - [Footnotes](#footnotes)
 
 ### Why don't I see the current day in my weather forecast?
 
@@ -94,7 +104,7 @@ Depending on your Home Assistant's configuration, your weather provider might de
 | forecast_days         | number           | **Optional** | Days of weather forecast to show                                                                                                                                                                       | `5`         |
 | locale                | string[^2]       | **Optional** | Language to use for language specific text. If not provided, falls back to the locale set in HA                                                                                                        | `en-GB`     |
 | time_format           | `24` \| `12`     | **Optional** | Format used to displayed the time. If not provided, falls back to the time format set in HA                                                                                                            | `24`        |
-| date_pattern          | string           | **Optional** | Pattern to use for time formatting. If not provided, falls back to the default date formatting of the configured language. See [date-fns](https://date-fns.org/v2.29.3/docs/format) for valid patterns | `P`         |
+| date_pattern          | string           | **Optional** | Pattern to use for time formatting. If not provided, falls back to the default date formatting of the configured language. See [date-fns](https://date-fns.org/v2.29.3/docs/format) for valid patterns | `eeeeee, P` |
 | hide_today_section    | boolean          | **Optional** | Hides the cards today section (upper section), containing the large weather icon, clock and current date                                                                                               | `false`     |
 | hide_forecast_section | boolean          | **Optional** | Hides the cards forecast section (lower section),containing the weather forecast                                                                                                                       | `false`     |
 

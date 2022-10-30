@@ -179,7 +179,7 @@ export class ClockWeatherCard extends LitElement {
   }
 
   private renderForecastDay(forecast: MergedWeatherForecast, gradientRange: Rgb[], minTemp: number, maxTemp: number, currentTemp: number): TemplateResult {
-    const dayText = this.localize(`day.${new Date(forecast.datetime).getDay()}`);
+    const dayText = format(forecast.datetime, 'eeeeee', { locale: this.getDateFnsLocale() });
     const weatherState = forecast.condition === 'pouring' ? 'raindrops' : forecast.condition === 'rainy' ? 'raindrop' : forecast.condition;
     const weatherIcon = this.toIcon(weatherState, 'fill', true, 'static');
     const tempUnit = this.getWeather().attributes.temperature_unit;
@@ -317,7 +317,7 @@ export class ClockWeatherCard extends LitElement {
       time_format: config.time_format?.toString() as '12' | '24' | undefined,
       hide_forecast_section: config.hide_forecast_section || false,
       hide_today_section: config.hide_today_section || false,
-      date_pattern: config.date_pattern || 'P'
+      date_pattern: config.date_pattern || 'eeeeee, P'
     };
   }
 
@@ -360,9 +360,7 @@ export class ClockWeatherCard extends LitElement {
   }
 
   private date(): string {
-    const weekday = this.localize(`day.${this.currentDate.getDay()}`);
-    const date = format(this.currentDate, this.config.date_pattern, { locale: this.getDateFnsLocale() });
-    return`${weekday}, ${date}`
+    return format(this.currentDate, this.config.date_pattern, { locale: this.getDateFnsLocale() });
   }
 
   private time(): string {
